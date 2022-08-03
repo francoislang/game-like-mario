@@ -1,4 +1,7 @@
+// define repaint background
+
 package com.lang.jeu;
+
 
 public class chrono implements Runnable{
 
