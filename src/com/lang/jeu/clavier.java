@@ -1,4 +1,4 @@
-//define keyboard movement
+//define keyboard action
 
 package com.lang.jeu;
 
@@ -18,23 +18,31 @@ public class clavier implements KeyListener {
 
         // right movement
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            if (main.scene.getxPos() == -1){
-                main.scene.setxPos(0);
-                main.scene.setxFond1(-50);
-                main.scene.setxFond2(750);
-            }
 
-            main.scene.setDx(1);
+            //fix castle and start game
+            
+            if (main.scene.getxPos() == -1){
+                main.scene.setxPos(0);  // reset xPos
+                main.scene.setxFond1(-50); // rest xFond1
+                main.scene.setxFond2(750); // reset xFond2
+            }
+            main.scene.mario.setMarche(true);
+            main.scene.mario.setVersDroite(true);
+            main.scene.setDx(1); // scene movement to the left
 
         // left movement
         }else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            main.scene.setDx(-1);
+            main.scene.mario.setMarche(true);
+            main.scene.mario.setVersDroite(false);
+            main.scene.setDx(-1); // scene movement to the right
         }
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // this function is necessary to stop the scene movement when we release a move button
+        main.scene.mario.setMarche(false);
         main.scene.setDx(0);
 
     }

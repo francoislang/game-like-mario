@@ -2,17 +2,19 @@
 
 package com.lang.jeu;
 
+import com.lang.personnages.Mario;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class scene extends JPanel {
 
+    // Variables
     private ImageIcon icoFond;
     private Image imgFond1;
     private Image imgFond2;
 
-    private ImageIcon icoMario;
-    private Image imgMario;
+
 
     private ImageIcon icoChateau1;
     private Image imgChateau1;
@@ -26,6 +28,10 @@ public class scene extends JPanel {
     private int dx;
 
     private int xPos;
+
+
+    public Mario mario;
+
     // constructor
     public scene(){
         super();
@@ -40,14 +46,15 @@ public class scene extends JPanel {
         this.imgFond1 = this.icoFond.getImage();
         this.imgFond2 = this.icoFond.getImage();
 
-        icoMario = new ImageIcon(getClass().getResource("/images/marioMarcheDroite.png"));
-        this.imgMario = this.icoMario.getImage();
+
 
         this.icoChateau1 = new ImageIcon((getClass().getResource("/images/chateau1.png")));
         this.imgChateau1 = this.icoChateau1.getImage();
 
         this.icoDepart = new ImageIcon(getClass().getResource("/images/depart.png"));
         this.imgDepart = this.icoDepart.getImage();
+
+        mario = new Mario(300, 245);
 
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -85,9 +92,10 @@ public class scene extends JPanel {
         this.xFond2 = xFond2;
     }
 
-   // methods
+    // methods
 
 
+    // screen movement to show Mario movement
     public void deplacementFond(){
 
 
@@ -122,7 +130,7 @@ public class scene extends JPanel {
         g2.drawImage(this.imgFond1, this.xFond1, 0, null);
         g2.drawImage(this.imgFond2, this.xFond2, 0, null);
 
-        g2.drawImage(imgMario, 300, 245, null);
+        g2.drawImage(this.mario.marche("mario", 25), 300, 245, null);
         g2.drawImage(imgChateau1, 10 - this.xPos, 95, null);
         g2.drawImage(imgDepart, 220 - this.xPos, 234, null);
 

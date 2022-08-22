@@ -10,7 +10,7 @@ public class chrono implements Runnable{
     public void run(){
 
         while(true){
-            main.scene.repaint();
+            main.scene.repaint(); // call method PaintComponent
 
             try{
                 Thread.sleep(PAUSE);
