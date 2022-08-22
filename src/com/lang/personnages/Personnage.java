@@ -1,6 +1,7 @@
 package com.lang.personnages;
 
 import com.lang.jeu.main;
+import com.lang.objets.Objet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,7 +92,7 @@ public class Personnage {
             if(this.versDroite == true){
                 str = "/images/" + nom + "ArretDroite.png";
             } else{
-                str = "/images" + nom + "ArretGauche.png";
+                str = "/images/" + nom + "ArretGauche.png";
             }
         }else {
             this.compteur++;
@@ -117,4 +118,22 @@ public class Personnage {
         return img;
     }
 
+    public boolean contactAvant(Objet objet){
+
+        if(this.isVersDroite() == true){
+            if(this.x + this.largeur <= objet.getX() || this.x + this.largeur >= objet.getX() + 5 || this.y + this.hauteur <= objet.getY() || this.y >= objet.getY() + objet.getHauteur())
+            {
+                return false;
+            }
+            else{
+                return true;
+            }
+
+        }else{
+            return false;
+        }
+
+
+
+}
 }

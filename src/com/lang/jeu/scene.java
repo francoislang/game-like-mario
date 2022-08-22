@@ -2,6 +2,8 @@
 
 package com.lang.jeu;
 
+import com.lang.objets.Bloc;
+import com.lang.objets.TuyauRouge;
 import com.lang.personnages.Mario;
 
 import javax.swing.*;
@@ -31,6 +33,8 @@ public class scene extends JPanel {
 
 
     public Mario mario;
+    public TuyauRouge tuyauRouge1;
+    public Bloc bloc1;
 
     // constructor
     public scene(){
@@ -55,6 +59,8 @@ public class scene extends JPanel {
         this.imgDepart = this.icoDepart.getImage();
 
         mario = new Mario(300, 245);
+        tuyauRouge1 = new TuyauRouge(600, 230);
+        bloc1 = new Bloc(400, 180);
 
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -125,14 +131,28 @@ public class scene extends JPanel {
         super.paintComponent(g);
         Graphics g2 = (Graphics2D)g;
 
+        // contact with object
+
+        if(this.mario.contactAvant(tuyauRouge1) == true){
+            this.mario.setMarche(false);
+            this.dx = 0;
+        }
+
         this.deplacementFond();
+        this.tuyauRouge1.deplacement();
+
+
 
         g2.drawImage(this.imgFond1, this.xFond1, 0, null);
         g2.drawImage(this.imgFond2, this.xFond2, 0, null);
 
-        g2.drawImage(this.mario.marche("mario", 25), 300, 245, null);
+        g2.drawImage(this.mario.marche("mario", 10), 300, 245, null);
         g2.drawImage(imgChateau1, 10 - this.xPos, 95, null);
         g2.drawImage(imgDepart, 220 - this.xPos, 234, null);
+
+        g2.drawImage(this.tuyauRouge1.getImgTuyauRouge(), this.tuyauRouge1.getX(), this.tuyauRouge1.getY(), null);
+        g2.drawImage(this.bloc1.getImgBloc(), this.bloc1.getX() - this.xPos , this.bloc1.getY(), null);
+
 
 
     }
