@@ -2,6 +2,7 @@ package com.lang.personnages;
 
 import com.lang.jeu.main;
 import com.lang.objets.Objet;
+import com.lang.objets.Piece;
 
 import javax.swing.*;
 import java.awt.*;
@@ -124,6 +125,15 @@ public class Mario extends Personnage{
             
         }
 
+    }
+
+    public boolean contactPiece(Piece piece){
+        if (this.contactArriere(piece) == true || this.contactAvant(piece) == true || this.contactDessus(piece) == true || this.contactDessous(piece) == true){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 

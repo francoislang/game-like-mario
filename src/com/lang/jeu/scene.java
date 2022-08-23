@@ -4,6 +4,7 @@ package com.lang.jeu;
 
 import com.lang.objets.Bloc;
 import com.lang.objets.Objet;
+import com.lang.objets.Piece;
 import com.lang.objets.TuyauRouge;
 import com.lang.personnages.Mario;
 
@@ -61,12 +62,26 @@ public class scene extends JPanel {
     public Bloc bloc11;
     public Bloc bloc12;
 
+    public Piece piece1;
+    public Piece piece2;
+    public Piece piece3;
+    public Piece piece4;
+    public Piece piece5;
+    public Piece piece6;
+    public Piece piece7;
+    public Piece piece8;
+    public Piece piece9;
+    public Piece piece10;
+
+
     public ImageIcon icoDrapeau;
     public Image imgDrapeau;
     public ImageIcon icoChateauFin;
     public Image imgChateauFin;
 
     private ArrayList<Objet> tabObjets; // array contain all objects
+
+    private ArrayList<Piece> tabPieces; // array contain all coin
     // constructor
     public scene(){
         super();
@@ -117,6 +132,19 @@ public class scene extends JPanel {
         bloc11 = new Bloc(4200, 200);
         bloc12 = new Bloc(4300, 210);
 
+
+        piece1 = new Piece(402, 145);
+        piece2 = new Piece(1202, 140);
+        piece3 = new Piece(1272, 95);
+        piece4 = new Piece(1342, 40);
+        piece5 = new Piece(1650, 145);
+        piece6 = new Piece(2650, 145);
+        piece7 = new Piece(3000, 135);
+        piece8 = new Piece(3400, 125);
+        piece9 = new Piece(4200, 145);
+        piece10 = new Piece(4600, 40);
+
+
         this.icoChateauFin = new ImageIcon((getClass().getResource("/images/chateauFin.png")));
         this.imgChateauFin = this.icoChateauFin.getImage();
 
@@ -146,6 +174,19 @@ public class scene extends JPanel {
         this.tabObjets.add(this.bloc10);
         this.tabObjets.add(this.bloc11);
         this.tabObjets.add(this.bloc12);
+
+        tabPieces = new ArrayList<Piece>();
+
+        this.tabPieces.add(this.piece1);
+        this.tabPieces.add(this.piece2);
+        this.tabPieces.add(this.piece3);
+        this.tabPieces.add(this.piece4);
+        this.tabPieces.add(this.piece5);
+        this.tabPieces.add(this.piece6);
+        this.tabPieces.add(this.piece7);
+        this.tabPieces.add(this.piece8);
+        this.tabPieces.add(this.piece9);
+        this.tabPieces.add(this.piece10);
 
 
         this.setFocusable(true);
@@ -240,11 +281,23 @@ public class scene extends JPanel {
             }
         }
 
+        // contact with coin
+        for(int i = 0; i < this.tabPieces.size(); i++){
+            if (this.mario.proche(this.tabPieces.get(i))){
+                if(this.mario.contactPiece(this.tabPieces.get(i))){
+                    this.tabPieces.remove(i);
+                }
+            }
+        }
+
         // fixed object movement in the game
         this.deplacementFond();
         if (this.xPos >= 0 && this.xPos <= 4430) {
             for (int i = 0; i < this.tabObjets.size(); i++) {
                 this.tabObjets.get(i).deplacement();
+            }
+            for (int i = 0; i < this.tabPieces.size(); i++){
+                this.tabPieces.get(i).deplacement();
             }
         }
 
@@ -262,6 +315,12 @@ public class scene extends JPanel {
         for(int i = 0; i < this.tabObjets.size(); i++){
             g2.drawImage(this.tabObjets.get(i).getImgObjet(), this.tabObjets.get(i).getX(), this.tabObjets.get(i).getY(), null);
         }
+
+        // coin picture
+        for(int i = 0; i < this.tabPieces.size(); i++){
+            g2.drawImage(this.tabPieces.get(i).bouge(), this.tabPieces.get(i).getX(), this.tabPieces.get(i).getY(), null);
+        }
+
 
         // end flag
         g2.drawImage(imgDrapeau, 4650 - this.xPos, 115, null);
