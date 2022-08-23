@@ -31,6 +31,9 @@ public class scene extends JPanel {
 
     private int xPos;
 
+    private int ySol; // normal height of the ground
+
+    private int hauteurPlafond; // normal height of ceiling
 
     public Mario mario;
     public TuyauRouge tuyauRouge1;
@@ -45,6 +48,9 @@ public class scene extends JPanel {
 
         this.dx = 0;
         this.xPos = -1;
+
+        this.ySol = 293;
+        this.hauteurPlafond = 0;
 
         icoFond = new   ImageIcon(getClass().getResource("/images/fondEcran.png"));
         this.imgFond1 = this.icoFond.getImage();
@@ -80,6 +86,14 @@ public class scene extends JPanel {
     }
     public int getxPos(){
         return xPos;
+    }
+
+    public int getySol(){
+        return ySol;
+    }
+
+    public int getHautPlafond(){
+        return hauteurPlafond;
     }
 
     // setters
@@ -146,13 +160,19 @@ public class scene extends JPanel {
         g2.drawImage(this.imgFond1, this.xFond1, 0, null);
         g2.drawImage(this.imgFond2, this.xFond2, 0, null);
 
-        g2.drawImage(this.mario.marche("mario", 10), 300, 245, null);
+
         g2.drawImage(imgChateau1, 10 - this.xPos, 95, null);
         g2.drawImage(imgDepart, 220 - this.xPos, 234, null);
 
         g2.drawImage(this.tuyauRouge1.getImgTuyauRouge(), this.tuyauRouge1.getX(), this.tuyauRouge1.getY(), null);
         g2.drawImage(this.bloc1.getImgBloc(), this.bloc1.getX() - this.xPos , this.bloc1.getY(), null);
 
+        if(this.mario.isSaut()){
+            g2.drawImage(this.mario.saute(), this.mario.getX(), this.mario.getY(), null);
+        }
+        else {
+            g2.drawImage(this.mario.marche("mario", 25), this.mario.getX(), this.mario.getY(), null);
+        }
 
 
     }

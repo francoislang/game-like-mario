@@ -133,7 +133,5 @@ public class Personnage {
             return false;
         }
 
-
-
 }
 }

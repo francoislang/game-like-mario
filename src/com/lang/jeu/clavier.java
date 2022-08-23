@@ -37,6 +37,10 @@ public class clavier implements KeyListener {
             main.scene.setDx(-1); // scene movement to the right
         }
 
+        // mario jump
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            main.scene.mario.setSaut(true);
+        }
     }
 
     @Override
