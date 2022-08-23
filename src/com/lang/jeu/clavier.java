@@ -32,6 +32,12 @@ public class clavier implements KeyListener {
 
         // left movement
         }else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            if (main.scene.getxPos() == 4431){
+                main.scene.setxPos(4430);
+                main.scene.setxFond1(-50);
+                main.scene.setxFond2(750);
+            }
+
             main.scene.mario.setMarche(true);
             main.scene.mario.setVersDroite(false);
             main.scene.setDx(-1); // scene movement to the right

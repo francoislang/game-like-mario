@@ -2,11 +2,17 @@ package com.lang.objets;
 
 import com.lang.jeu.main;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Objet {
 
     // variable
     private int largeur, hauteur; // object dimension
     private int x, y; // object position
+
+    protected Image imgObjet;
+    protected ImageIcon icoObjet;
 
     //constructor
     public Objet(int x, int y, int largeur, int hauteur){
@@ -33,6 +39,10 @@ public class Objet {
 
     public int getHauteur() {
         return hauteur;
+    }
+
+    public Image getImgObjet(){
+        return imgObjet;
     }
 
     // setters

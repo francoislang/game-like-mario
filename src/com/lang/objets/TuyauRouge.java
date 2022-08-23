@@ -8,21 +8,18 @@ public class TuyauRouge extends Objet{
 
     // variable
 
-    private Image imgTuyauRouge;
-    private ImageIcon icoTuyauRouge;
+
 
     // constructor
 
     public TuyauRouge(int x, int y){
         super(x, y, 43, 65);
-        this.icoTuyauRouge = new ImageIcon(getClass().getResource("/images/tuyauRouge.png"));
-        this.imgTuyauRouge = this.icoTuyauRouge.getImage();
+        super.icoObjet = new ImageIcon(getClass().getResource("/images/tuyauRouge.png"));
+        super.imgObjet = this.icoObjet.getImage();
     }
 
     // getters
 
-    public Image getImgTuyauRouge(){
-        return imgTuyauRouge;
-    }
+
 }
 
