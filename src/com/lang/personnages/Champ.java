@@ -80,6 +80,23 @@ public class Champ extends Personnage implements Runnable{
 
     }
 
+    public Image meurt(){
+        String str;
+        ImageIcon ico;
+        Image img;
+
+
+
+        if (this.isVersDroite() == true){
+            str = "/images/champEcraseDroite.png";
+        }else {
+            str = "/images/champEcraseGauche.png";
+        }
+        ico = new ImageIcon(getClass().getResource(str));
+        img = ico.getImage();
+        return img;
+    }
+
     @Override
     public void run() {
         try {
@@ -88,9 +105,13 @@ public class Champ extends Personnage implements Runnable{
         catch (InterruptedException e){}
 
         while (true){
-            this.bouge();
-            try{Thread.sleep(PAUSE);}
-            catch (InterruptedException e){}
+            if (this.vivant == true) {
+                this.bouge();
+                try {
+                    Thread.sleep(PAUSE);
+                } catch (InterruptedException e) {
+                }
+            }
         }
     }
 

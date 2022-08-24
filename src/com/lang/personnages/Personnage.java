@@ -16,6 +16,7 @@ public class Personnage {
     private boolean versDroite; // true when character is turned to the right
     public int compteur; // counter step character
 
+    protected boolean vivant; // true if the charater is alive
     // Constructor
 
     public Personnage(int x, int y, int largeur, int hauteur){
@@ -27,6 +28,7 @@ public class Personnage {
         this.compteur = 0;
         this.marche = false;
         this.versDroite = true;
+        this.vivant = true;
     }
 
     // getters
@@ -59,6 +61,10 @@ public class Personnage {
         return compteur;
     }
 
+    public boolean isVivant(){
+        return vivant;
+    }
+
     // Setters
 
     public void setX(int x){
@@ -79,6 +85,10 @@ public class Personnage {
 
     public void setCompteur(int compteur){
         this.compteur = compteur;
+    }
+
+    public void setVivant(boolean vivant){
+        this.vivant = vivant;
     }
 
 
@@ -199,6 +209,14 @@ public class Personnage {
             return true;
         }
 
+    }
+
+    protected boolean contactDessous(Personnage personnage){
+        if (this.x + this.largeur < personnage.getX() || this.x > personnage.getX() + personnage.getLargeur() || this.y + this.hauteur < personnage.getY() || this.y + this.hauteur > personnage.getY()){
+            return false;
+        }else {
+            return true;
+        }
     }
 
     public boolean proche(Personnage personnage){

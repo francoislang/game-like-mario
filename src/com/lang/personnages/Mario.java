@@ -205,6 +205,16 @@ public class Mario extends Personnage{
         }
     }
 
+    public void contact(Personnage personnage){
+        if ((super.contactAvant(personnage) == true) || (super.contactArriere(personnage) == true)){
+            this.setMarche(false);
+            this.setVivant(false);
+        } else if (super.contactDessous(personnage) == true) {
+            personnage.setMarche(false);
+            personnage.setVivant(false);
+
+        }
+    }
 
 
 }

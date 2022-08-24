@@ -80,6 +80,17 @@ public class Tortue extends Personnage implements Runnable{
 
     }
 
+    public Image meurt(){
+        String str;
+        ImageIcon ico;
+        Image img;
+
+        str = "/images/tortueFermee.png";
+        ico = new ImageIcon(getClass().getResource(str));
+        img = ico.getImage();
+        return img;
+    }
+
     @Override
     public void run() {
         try {
@@ -87,10 +98,14 @@ public class Tortue extends Personnage implements Runnable{
         }
         catch (InterruptedException e){}
 
-        while (true){
-            this.bouge();
-            try{Thread.sleep(PAUSE);}
-            catch (InterruptedException e){}
+        while (true) {
+            if (this.vivant == true) {
+                this.bouge();
+                try {
+                    Thread.sleep(PAUSE);
+                } catch (InterruptedException e) {
+                }
+            }
         }
     }
 }

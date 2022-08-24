@@ -82,6 +82,27 @@ public class scene extends JPanel {
     public Piece piece10;
 
 
+    public Champ champ1;
+    public Champ champ2;
+    public Champ champ3;
+    public Champ champ4;
+    public Champ champ5;
+    public Champ champ6;
+    public Champ champ7;
+    public Champ champ8;
+
+    public Tortue tortue1;
+    public Tortue tortue2;
+    public Tortue tortue3;
+    public Tortue tortue4;
+    public Tortue tortue5;
+    public Tortue tortue6;
+    public Tortue tortue7;
+    public Tortue tortue8;
+    public Tortue tortue9;
+
+
+
     public ImageIcon icoDrapeau;
     public Image imgDrapeau;
     public ImageIcon icoChateauFin;
@@ -90,6 +111,10 @@ public class scene extends JPanel {
     private ArrayList<Objet> tabObjets; // array contain all objects
 
     private ArrayList<Piece> tabPieces; // array contain all coin
+
+    private ArrayList<Champ> tabChamps; // array contain all mushrooms
+
+    private ArrayList<Tortue> tabTortues; // array contain all tortles
 
 
     // constructor
@@ -322,6 +347,18 @@ public class scene extends JPanel {
             this.tortue.contact(champ);
         }
 
+        // contact mario with mushroom
+        if (this.mario.proche(champ) && this.mario.isVivant() == true){
+            this.mario.contact(champ);
+        }
+
+        // contact mario with tortle
+        if (this.mario.proche(tortue) && this.mario.isVivant() == true){
+            this.mario.contact(tortue);
+        }
+
+
+
         // fixed object movement in the game
         this.deplacementFond();
         if (this.xPos >= 0 && this.xPos <= 4430) {
@@ -371,10 +408,18 @@ public class scene extends JPanel {
         }
 
         // picture mushroom
-        g2.drawImage(this.champ.marche("champ", 45), this.champ.getX(), this.champ.getY(), null);
+        if (this.champ.isVivant() == true){
+            g2.drawImage(this.champ.marche("champ", 45), this.champ.getX(), this.champ.getY(), null);
+        }else {
+            g2.drawImage(this.champ.meurt(), this.champ.getX(), this.champ.getY() + 20, null);
+        }
 
         // picture tortle
-        g2.drawImage(this.tortue.marche("tortue", 45), this.tortue.getX(), this.tortue.getY(), null);
+        if (this.tortue.isVivant() == true) {
+            g2.drawImage(this.tortue.marche("tortue", 45), this.tortue.getX(), this.tortue.getY(), null);
+        }else {
+            g2.drawImage(this.tortue.meurt(), this.tortue.getX(), this.tortue.getY() + 30, null);
+        }
 
     }
 

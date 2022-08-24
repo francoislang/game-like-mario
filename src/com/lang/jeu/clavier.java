@@ -16,36 +16,39 @@ public class clavier implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        // right movement
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+        if (main.scene.mario.isVivant() == true) {
 
-            //fix castle and start game
-            
-            if (main.scene.getxPos() == -1){
-                main.scene.setxPos(0);  // reset xPos
-                main.scene.setxFond1(-50); // rest xFond1
-                main.scene.setxFond2(750); // reset xFond2
+            // right movement
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+
+                //fix castle and start game
+
+                if (main.scene.getxPos() == -1) {
+                    main.scene.setxPos(0);  // reset xPos
+                    main.scene.setxFond1(-50); // rest xFond1
+                    main.scene.setxFond2(750); // reset xFond2
+                }
+                main.scene.mario.setMarche(true);
+                main.scene.mario.setVersDroite(true);
+                main.scene.setDx(1); // scene movement to the left
+
+                // left movement
+            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                if (main.scene.getxPos() == 4431) {
+                    main.scene.setxPos(4430);
+                    main.scene.setxFond1(-50);
+                    main.scene.setxFond2(750);
+                }
+
+                main.scene.mario.setMarche(true);
+                main.scene.mario.setVersDroite(false);
+                main.scene.setDx(-1); // scene movement to the right
             }
-            main.scene.mario.setMarche(true);
-            main.scene.mario.setVersDroite(true);
-            main.scene.setDx(1); // scene movement to the left
 
-        // left movement
-        }else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            if (main.scene.getxPos() == 4431){
-                main.scene.setxPos(4430);
-                main.scene.setxFond1(-50);
-                main.scene.setxFond2(750);
+            // mario jump
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                main.scene.mario.setSaut(true);
             }
-
-            main.scene.mario.setMarche(true);
-            main.scene.mario.setVersDroite(false);
-            main.scene.setDx(-1); // scene movement to the right
-        }
-
-        // mario jump
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            main.scene.mario.setSaut(true);
         }
     }
 
