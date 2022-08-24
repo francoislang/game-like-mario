@@ -6,6 +6,7 @@ import com.lang.objets.Bloc;
 import com.lang.objets.Objet;
 import com.lang.objets.Piece;
 import com.lang.objets.TuyauRouge;
+import com.lang.personnages.Champ;
 import com.lang.personnages.Mario;
 
 import javax.swing.*;
@@ -39,6 +40,9 @@ public class scene extends JPanel {
     private int hauteurPlafond; // normal height of ceiling
 
     public Mario mario;
+
+    public Champ champ;
+
     public TuyauRouge tuyauRouge1;
     public TuyauRouge tuyauRouge2;
     public TuyauRouge tuyauRouge3;
@@ -82,6 +86,8 @@ public class scene extends JPanel {
     private ArrayList<Objet> tabObjets; // array contain all objects
 
     private ArrayList<Piece> tabPieces; // array contain all coin
+
+
     // constructor
     public scene(){
         super();
@@ -108,6 +114,8 @@ public class scene extends JPanel {
         this.imgDepart = this.icoDepart.getImage();
 
         mario = new Mario(300, 245);
+
+        champ = new Champ(800, 263);
 
         tuyauRouge1 = new TuyauRouge(600, 230);
         tuyauRouge2 = new TuyauRouge(1000, 230);
@@ -279,6 +287,10 @@ public class scene extends JPanel {
             if (this.mario.proche(this.tabObjets.get(i))){
                 this.mario.contact(this.tabObjets.get(i));
             }
+            // mushroom
+            if (this.champ.proche(this.tabObjets.get(i))){
+                this.champ.contact(this.tabObjets.get(i));
+            }
         }
 
         // contact with coin
@@ -299,6 +311,7 @@ public class scene extends JPanel {
             for (int i = 0; i < this.tabPieces.size(); i++){
                 this.tabPieces.get(i).deplacement();
             }
+            this.champ.deplacement();
         }
 
         // background picture
@@ -336,6 +349,8 @@ public class scene extends JPanel {
             g2.drawImage(this.mario.marche("mario", 25), this.mario.getX(), this.mario.getY(), null);
         }
 
+        // picture mushroom
+        g2.drawImage(this.champ.marche("champ", 45), this.champ.getX(), this.champ.getY(), null);
 
     }
 

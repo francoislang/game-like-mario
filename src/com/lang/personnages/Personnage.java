@@ -89,7 +89,7 @@ public class Personnage {
         ImageIcon ico;
         Image img;
 
-        if(this.marche == false || main.scene.getxPos() <= 0 || main.scene.getxPos() > 4430){
+        if(this.marche == false  ){
             if(this.versDroite == true){
                 str = "/images/" + nom + "ArretDroite.png";
             } else{
@@ -119,6 +119,13 @@ public class Personnage {
         return img;
     }
 
+
+    public void deplacement(){
+        if(main.scene.getxPos() >= 0){
+            this.x = this.x - main.scene.getDx();
+
+        }
+    }
 
     // contact detection on the right side of mario
     protected boolean contactAvant(Objet objet) {

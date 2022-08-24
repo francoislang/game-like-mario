@@ -16,6 +16,10 @@ public class Mario extends Personnage{
     private boolean saut; // true if mario jump
     private int compteurSaut; // this variable is used to manage jump duration
 
+    private boolean marche; // true when character walks
+    private boolean versDroite; // true when character is turned to the right
+    public int compteur; // counter step character
+
     //constructor
     public Mario(int x, int y){
 
@@ -25,6 +29,10 @@ public class Mario extends Personnage{
 
         this.saut = false;
         this.compteurSaut = 0;
+
+        this.compteur = 0;
+        this.marche = false;
+        this.versDroite = true;
     }
 
     // getters
@@ -37,12 +45,73 @@ public class Mario extends Personnage{
         return saut;
     }
 
+    public boolean isMarche() {
+        return marche;
+    }
+
+    public boolean isVersDroite() {
+        return versDroite;
+    }
+
+    public int getCompteur() {
+        return compteur;
+    }
+
     // setters
     public void setSaut(boolean saut){
         this.saut = saut;
     }
+    public void setMarche(boolean marche){
+        this.marche = marche;
+    }
+
+    public void setVersDroite(boolean versDroite){
+        this.versDroite = versDroite;
+    }
+
+    public void setCompteur(int compteur){
+        this.compteur = compteur;
+    }
 
     // methods
+
+    @Override
+    public Image marche(String nom, int frequence){
+
+        String str;
+        ImageIcon ico;
+        Image img;
+
+        if(this.marche == false || main.scene.getxPos() < 0 || main.scene.getxPos() >= 4430){
+            if(this.versDroite == true){
+                str = "/images/" + nom + "ArretDroite.png";
+            } else{
+                str = "/images/" + nom + "ArretGauche.png";
+            }
+        }else {
+            this.compteur++;
+            if (this.compteur / frequence == 0){
+                if(this.versDroite == true){
+                    str = "/images/" + nom + "ArretDroite.png";
+                }else{
+                    str = "/images/" + nom + "ArretGauche.png";
+                }
+            }else{
+                if(this.versDroite == true){
+                    str = "/images/" + nom + "MarcheDroite.png";
+                }else{
+                    str = "/images/" + nom + "MarcheGauche.png";
+                }
+            }if(this.compteur == 2*frequence){
+                this.compteur = 0;
+            }
+        }
+        //show character picture
+        ico = new ImageIcon(getClass().getResource(str));
+        img = ico.getImage();
+        return img;
+    }
+
 
     public Image saute(){
 
