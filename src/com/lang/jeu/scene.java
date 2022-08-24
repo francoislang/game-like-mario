@@ -8,6 +8,8 @@ import com.lang.objets.Piece;
 import com.lang.objets.TuyauRouge;
 import com.lang.personnages.Champ;
 import com.lang.personnages.Mario;
+import com.lang.personnages.Personnage;
+import com.lang.personnages.Tortue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +44,8 @@ public class scene extends JPanel {
     public Mario mario;
 
     public Champ champ;
+
+    public Tortue tortue;
 
     public TuyauRouge tuyauRouge1;
     public TuyauRouge tuyauRouge2;
@@ -116,6 +120,8 @@ public class scene extends JPanel {
         mario = new Mario(300, 245);
 
         champ = new Champ(800, 263);
+
+        tortue = new Tortue(950, 243);
 
         tuyauRouge1 = new TuyauRouge(600, 230);
         tuyauRouge2 = new TuyauRouge(1000, 230);
@@ -291,6 +297,10 @@ public class scene extends JPanel {
             if (this.champ.proche(this.tabObjets.get(i))){
                 this.champ.contact(this.tabObjets.get(i));
             }
+            // tortle
+            if (this.tortue.proche(this.tabObjets.get(i))){
+                this.tortue.contact(this.tabObjets.get(i));
+            }
         }
 
         // contact with coin
@@ -300,6 +310,16 @@ public class scene extends JPanel {
                     this.tabPieces.remove(i);
                 }
             }
+        }
+
+        // contact mushroom with tortle
+        if (this.champ.proche(tortue)){
+            this.champ.contact(tortue);
+        }
+
+        // contact tortle with mushroom
+        if (this.tortue.proche(champ)){
+            this.tortue.contact(champ);
         }
 
         // fixed object movement in the game
@@ -312,6 +332,7 @@ public class scene extends JPanel {
                 this.tabPieces.get(i).deplacement();
             }
             this.champ.deplacement();
+            this.tortue.deplacement();
         }
 
         // background picture
@@ -351,6 +372,9 @@ public class scene extends JPanel {
 
         // picture mushroom
         g2.drawImage(this.champ.marche("champ", 45), this.champ.getX(), this.champ.getY(), null);
+
+        // picture tortle
+        g2.drawImage(this.tortue.marche("tortue", 45), this.tortue.getX(), this.tortue.getY(), null);
 
     }
 

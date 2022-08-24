@@ -67,6 +67,19 @@ public class Champ extends Personnage implements Runnable{
 
     }
 
+    public void contact(Personnage personnage){
+        // horizontal contact
+        if(super.contactAvant(personnage) == true && this.isVersDroite() == true){
+            super.setVersDroite(false);
+            this.dxChamp = -1;
+        } else if (super.contactArriere(personnage) == true && this.isVersDroite() == false) {
+            super.setVersDroite(true);
+            this.dxChamp = 1;
+
+        }
+
+    }
+
     @Override
     public void run() {
         try {

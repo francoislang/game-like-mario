@@ -177,4 +177,38 @@ public class Personnage {
             return  false;
         }
     }
+
+    // front contact  with differents characters
+    protected boolean contactAvant (Personnage personnage){
+        if (this.isVersDroite() == true){
+            if (this.x + this.largeur < personnage.getX() || this.x + this.largeur > personnage.getX() + 5 || this.y + this.hauteur <= personnage.getY() || this.y >= personnage.getY() + personnage.getHauteur()){
+                return false;
+            }else {
+                return true;
+            }
+        }else {
+            return false;
+        }
+    }
+
+    // back contact with differents characters
+    protected boolean contactArriere (Personnage personnage){
+        if (this.x > personnage.getX() + personnage.getLargeur() || this.x + this.largeur < personnage.getX() + personnage.getLargeur() - 5 || this.y + this.hauteur <= personnage.getY() || this.y >= personnage.getY()+ personnage.getHauteur()){
+            return false;
+        }else {
+            return true;
+        }
+
+    }
+
+    public boolean proche(Personnage personnage){
+        if ((this.x > personnage.getX() - 10 && this.x < personnage.getX() + personnage.getLargeur() + 10) || (this.x + this.largeur > personnage.getX() - 10 && this.x + this.largeur < personnage.getX() + personnage.getLargeur() + 10)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+
 }

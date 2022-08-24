@@ -1,5 +1,7 @@
 package com.lang.personnages;
 
+import com.lang.objets.Objet;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -49,6 +51,33 @@ public class Tortue extends Personnage implements Runnable{
         }
 
         super.setX(super.getX() + this.dxTortue);
+    }
+
+
+    public void contact(Objet objet){
+        // horizontal contact
+        if(super.contactAvant(objet) == true && this.isVersDroite() == true){
+            super.setVersDroite(false);
+            this.dxTortue = -1;
+        } else if (super.contactArriere(objet) == true && this.isVersDroite() == false) {
+            super.setVersDroite(true);
+            this.dxTortue = 1;
+
+        }
+
+    }
+
+    public void contact(Personnage personnage){
+        // horizontal contact
+        if(super.contactAvant(personnage) == true && this.isVersDroite() == true){
+            super.setVersDroite(false);
+            this.dxTortue = -1;
+        } else if (super.contactArriere(personnage) == true && this.isVersDroite() == false) {
+            super.setVersDroite(true);
+            this.dxTortue = 1;
+
+        }
+
     }
 
     @Override
