@@ -2,6 +2,7 @@
 
 package com.lang.jeu;
 
+import com.lang.affichage.Score;
 import com.lang.objets.Bloc;
 import com.lang.objets.Objet;
 import com.lang.objets.Piece;
@@ -43,9 +44,7 @@ public class scene extends JPanel {
 
     public Mario mario;
 
-    public Champ champ;
 
-    public Tortue tortue;
 
     public TuyauRouge tuyauRouge1;
     public TuyauRouge tuyauRouge2;
@@ -115,6 +114,11 @@ public class scene extends JPanel {
     private ArrayList<Champ> tabChamps; // array contain all mushrooms
 
     private ArrayList<Tortue> tabTortues; // array contain all tortles
+
+
+    private Score score;
+
+    private Font police;
 
 
     // constructor
@@ -276,6 +280,9 @@ public class scene extends JPanel {
         this.requestFocusInWindow();
         this.addKeyListener(new clavier());
 
+        score = new Score();
+        police = new Font("Arial", Font.PLAIN, 18);
+
         Thread chronoEcran = new Thread(new chrono());
         chronoEcran.start();
     }
@@ -381,6 +388,7 @@ public class scene extends JPanel {
             if (this.mario.proche(this.tabPieces.get(i))){
                 if(this.mario.contactPiece(this.tabPieces.get(i))){
                     this.tabPieces.remove(i);
+                    this.score.setNbrePieces(this.score.getNbrePieces() + 1);
                 }
             }
         }
@@ -517,6 +525,9 @@ public class scene extends JPanel {
             }
         }
 
+        // update score
+        g2.setFont(police);
+        g2.drawString(this.score.getNbrePieces() + "piece(s) trouvée(s) sur" + this.score.getNBRE_TOTAL_PIECES(), 460, 25);
     }
 
 }
