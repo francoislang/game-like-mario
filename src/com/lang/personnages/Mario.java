@@ -16,9 +16,12 @@ public class Mario extends Personnage{
     private boolean saut; // true if mario jump
     private int compteurSaut; // this variable is used to manage jump duration
 
+    private int compteurMort;
+
     private boolean marche; // true when character walks
     private boolean versDroite; // true when character is turned to the right
     public int compteur; // counter step character
+
 
     //constructor
     public Mario(int x, int y){
@@ -29,6 +32,7 @@ public class Mario extends Personnage{
 
         this.saut = false;
         this.compteurSaut = 0;
+        this.compteurMort = 0;
 
         this.compteur = 0;
         this.marche = false;
@@ -214,6 +218,24 @@ public class Mario extends Personnage{
             personnage.setVivant(false);
 
         }
+    }
+
+    public Image meurt(){
+
+        String str;
+        ImageIcon ico;
+        Image img;
+
+        str = "/images/boom.png";
+        this.compteurMort++;
+        if (this.compteurMort > 100){
+            str = "/images/marioMeurt.png";
+            this.setY(this.getY() - 1);
+        }
+        ico = new ImageIcon(getClass().getResource(str));
+        img = ico.getImage();
+        return img;
+
     }
 
 

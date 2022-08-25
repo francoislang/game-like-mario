@@ -2,6 +2,7 @@
 
 package com.lang.jeu;
 
+import com.lang.affichage.CompteARebours;
 import com.lang.affichage.Score;
 import com.lang.objets.Bloc;
 import com.lang.objets.Objet;
@@ -119,6 +120,8 @@ public class scene extends JPanel {
     private Score score;
 
     private Font police;
+
+    private CompteARebours compteARebours;
 
 
     // constructor
@@ -282,6 +285,7 @@ public class scene extends JPanel {
 
         score = new Score();
         police = new Font("Arial", Font.PLAIN, 18);
+        compteARebours = new CompteARebours();
 
         Thread chronoEcran = new Thread(new chrono());
         chronoEcran.start();
@@ -354,6 +358,30 @@ public class scene extends JPanel {
         } else if (this.xFond2 == -800) {
             this.xFond2 = 800;
 
+        }
+    }
+
+    private boolean partieGagnee(){
+        if (this.compteARebours.getCompteurTemps() > 0 && this.mario.isVivant() == true && this.score.getNbrePieces() == 10 && this.xPos > 4400){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean partiePerdue (){
+        if (this.mario.isVivant() == false || this.compteARebours.getCompteurTemps() <= 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean finDePartie(){
+        if (this.partieGagnee() == true || this.partiePerdue() == true){
+            return true;
+        }else {
+            return false;
         }
     }
 
@@ -499,13 +527,18 @@ public class scene extends JPanel {
         // end castle
         g2.drawImage(imgChateauFin, 5000 - this.xPos, 145, null);
 
-        // picture if mario jump or run
-        if(this.mario.isSaut()){
-            g2.drawImage(this.mario.saute(), this.mario.getX(), this.mario.getY(), null);
+        // picture if mario jump, run or dead
+        if (this.mario.isVivant() == true){
+            if(this.mario.isSaut()){
+                g2.drawImage(this.mario.saute(), this.mario.getX(), this.mario.getY(), null);
+            }
+            else {
+                g2.drawImage(this.mario.marche("mario", 25), this.mario.getX(), this.mario.getY(), null);
+            }
+        }else {
+            g2.drawImage(this.mario.meurt(), this.mario.getX(), this.mario.getY(), null);
         }
-        else {
-            g2.drawImage(this.mario.marche("mario", 25), this.mario.getX(), this.mario.getY(), null);
-        }
+
 
         // picture mushroom
         for (int i = 0; i < this.tabChamps.size(); i++){
@@ -527,7 +560,21 @@ public class scene extends JPanel {
 
         // update score
         g2.setFont(police);
-        g2.drawString(this.score.getNbrePieces() + "piece(s) trouvée(s) sur" + this.score.getNBRE_TOTAL_PIECES(), 460, 25);
+        g2.drawString(this.score.getNbrePieces() + "pièce(s) trouvée(s) sur" + this.score.getNBRE_TOTAL_PIECES(), 460, 25);
+
+        // update countdown
+        g2.drawString(this.compteARebours.getStr(), 5, 25);
+
+        // end of game
+        if (this.finDePartie() == true){
+            Font policeFin = new Font("Arial", Font.BOLD, 50);
+            g2.setFont(policeFin);
+            if (this.partieGagnee() == true){
+                g2.drawString("Vous avez gagné !!", 120, 180);
+            }else {
+                g2.drawString("Vous avez perdu...", 120, 180);
+            }
+        }
     }
 
 }
